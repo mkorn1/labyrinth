@@ -1,2 +1,2 @@
-﻿$ nmap -sn my.ip.addr (locate newest ip as raspberry, curr_rasp = 192.168.0.24)
+﻿$ nmap -sn my.ip.addr/24 (locate newest ip as raspberry, curr_rasp = 192.168.0.24)
 $ ssh pi@raspberry.ip (pw = vivarobotics)
