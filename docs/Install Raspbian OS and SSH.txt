@@ -1,0 +1,53 @@
+﻿Installing OS (opt1)
+1. Download Raspbian OS 
+   1. https://www.raspberrypi.org/downloads/raspbian/
+1. Check SD Disk Before ($ diskutil list)
+2. Insert SD into Mac
+3. Determine New Disk Number ($ diskutil list)
+4. Wipe SD
+   1. $ sudo diskutil unmountDisk /dev/disk6
+1. Copy Unzipped Image (may take several minutes)
+   1. $ sudo dd bs=1m if=~/Downloads/2018-11-13-raspbian-stretch-full.img of=/dev/rdisk6
+
+
+Install OS (opt2)
+1. Download NOOBS installer
+   1. https://www.raspberrypi.org/downloads/noobs/
+1. Install SD Formatter
+   1. https://www.sdcard.org/downloads/formatter_4/
+1. Wipe and Install SD with SD Formatter GUI
+
+
+Configure SSH
+1. Enable SSH on Pi with file creation
+   1. $ cd /Volumes/boot/
+   2. $ touch ssh (empty file)
+1. Preconfigure Pi to Connect to Wifi
+   1. $ touch wpa_supplicant.conf
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=<TWO_LETTER_ISO_COUNTRY_CODE>
+
+
+network={
+    ssid="<WIFI_NETWORK_NAME>"
+    psk="<WIFI_PASSWORD>"
+    key_mgmt=WPA-PSK
+}
+
+
+1. Eject the boot volume
+
+
+Connect with SSH
+1. Connect Pi to Power (MAKE SURE CONNECTION IS SECURE, low voltage prevented boot)
+2. Connect HDMI (to visualize)
+3. Insert SD into Pi (might take a minute to boot)
+4. Install nmap
+   1. $ brew install nmap
+1. Scan Local Network for Most Recently Connected device
+   1. $ nmap -sn my.ip.address/24 (looks at 255 local addresses from CIDR)
+1. Connect
+   1. $ ssh pi@rasp.pi.addr (password  is raspberry)
+1. Change Password
+   1. $ passwd (vivarobotics)
